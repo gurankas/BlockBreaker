@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 
 public class firstActivity extends JFrame implements ActionListener
 {
-	JButton novice,intermediate,expert;
+	JButton novice,intermediate,expert,exit;
 	JLabel heading;
 
 	firstActivity()
@@ -36,9 +36,15 @@ public class firstActivity extends JFrame implements ActionListener
 		heading.setBounds(200, 210, 200, 30);
 		this.add(heading);
 		
+		exit = new JButton("Exit");
+		exit.setBounds(225, 500, 115, 30);
+		this.add(exit);
+		
 		novice.addActionListener(this);
 		intermediate.addActionListener(this);
 		expert.addActionListener(this);
+		exit.addActionListener(this);
+		
 	this.setVisible(true);}
 	
 	public static void main(String[] args) {
@@ -66,6 +72,11 @@ public class firstActivity extends JFrame implements ActionListener
 		{	
 		this.hide();
 		new Main(3);
+		}
+		
+		if (arg0.getSource()== exit)
+		{	
+		this.hide();
 		}
 
 }

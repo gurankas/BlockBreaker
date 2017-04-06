@@ -22,6 +22,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener{
 	
 	int size = 25;
 	static int mainLevel;
+	int number_of_balls_present = 1;
 	
 	BlockBreakerPanel(int level){
 		
@@ -68,6 +69,8 @@ public class BlockBreakerPanel extends JPanel implements KeyListener{
 			if(p.intersects(paddle) && !p.destroyed){
 				p.destroyed = true;
 				ball.add(new Block(paddle.dx+75, 437, 25,25,"ball.png"));
+				number_of_balls_present++;
+				JOptionPane.showMessageDialog(this, number_of_balls_present);
 			}
 		}
 	}
@@ -85,20 +88,26 @@ public class BlockBreakerPanel extends JPanel implements KeyListener{
 			ba.y += ba.dy;
 			if (ba.y > 580)
 			{
-				if(ball.size() <= 1)
+				number_of_balls_present--;
+				JOptionPane.showMessageDialog(this, number_of_balls_present+"after decrement");
+				if(number_of_balls_present == 0)
 				{
 					int option = JOptionPane.showConfirmDialog(this, "Do you want to try again?", "Confirm Dialogue", JOptionPane.YES_NO_OPTION);
 					
 					
-					if (option == 0)
+					if (option == 0)		//0 is for yes
 					{
-						this.hide();
-						new firstActivity();
+						Main.terminateWindow();
+						new Main(mainLevel);
 					}
 						
 						
-					else
-						this.hide();
+					else					//1 is for no
+					{
+						Main.terminateWindow();
+
+						new firstActivity();
+					}
 					thread.stop();
 				}
 			}
